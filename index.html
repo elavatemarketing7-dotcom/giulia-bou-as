@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dra. Giulia Bouças | Harmonização Facial</title>
+    <title>Dra. Giulia Bouças | Harmonização Facial de Luxo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +13,7 @@
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
+            background-color: #fff;
         }
         h1, h2, h3, .serif {
             font-family: 'Cormorant Garamond', serif;
@@ -24,30 +25,38 @@
             background: linear-gradient(135deg, #fdf2f8 0%, #ede9fe 100%);
         }
         .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
         .animate-float {
-            animation: float 3s ease-in-out infinite;
+            animation: float 4s ease-in-out infinite;
         }
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-15px); }
+        }
+        /* Ajuste para garantir que o conteúdo não fique escondido sob a imagem no mobile */
+        .hero-text-shadow {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
     </style>
-<script type="importmap">
+    <script type="importmap">
 {
   "imports": {
-    "react": "https://esm.sh/react@^19.2.3",
+    "react": "https://esm.sh/react@19.0.0",
+    "react-dom": "https://esm.sh/react-dom@19.0.0",
+    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+    "lucide-react": "https://esm.sh/lucide-react@0.460.0",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+    "react/": "https://esm.sh/react@^19.2.3/"
   }
 }
 </script>
 </head>
 <body class="text-gray-900 overflow-x-hidden">
     <div id="root"></div>
+    <!-- O segredo para não ficar branco: carregar o ponto de entrada como módulo -->
+    <script type="module" src="./index.tsx"></script>
 </body>
 </html>
