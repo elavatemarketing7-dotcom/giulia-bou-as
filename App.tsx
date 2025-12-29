@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ChevronRight, ArrowRight, Instagram, CheckCircle2, Star, ShieldCheck, MapPin, MessageCircle, X } from 'lucide-react';
+import { ChevronRight, ArrowRight, Instagram, CheckCircle2, Star, ShieldCheck, MapPin, MessageCircle, X, Heart } from 'lucide-react';
 import { EXPERT_DATA, IMAGES, QUIZ_QUESTIONS } from './constants';
 
 type AppState = 'CHOICE' | 'QUIZ' | 'RESULT' | 'LANDING';
@@ -85,7 +85,6 @@ const App: React.FC = () => {
     const progress = ((currentQuestion + 1) / QUIZ_QUESTIONS.length) * 100;
     return (
       <div className="fixed inset-0 z-[110] bg-pink-lilac overflow-hidden flex flex-col">
-        {/* Foto da Dra sem cortes ou sombras no rosto */}
         <div className="h-[40vh] w-full relative shrink-0">
           <img src={IMAGES.quizBg} className="w-full h-full object-cover object-top" alt="Dra Giulia" />
           <div className="absolute inset-0 bg-gradient-to-t from-pink-lilac via-transparent"></div>
@@ -120,16 +119,14 @@ const App: React.FC = () => {
 
   const LandingPageView = () => (
     <div className="bg-white min-h-screen">
-      {/* HERO SECTION: Foco total na beleza da Dra */}
+      {/* HERO SECTION */}
       <section className="relative min-h-screen flex flex-col lg:flex-row bg-pink-lilac">
-        {/* Imagem Pura à Direita (Desktop) ou Topo (Mobile) */}
         <div className="w-full h-[55vh] lg:h-screen lg:w-1/2 lg:order-2 relative overflow-hidden">
           <img src={IMAGES.hero} className="w-full h-full object-cover object-top lg:scale-105" alt="Dra. Giulia Bouças" />
           <div className="absolute inset-0 bg-gradient-to-t from-pink-lilac via-transparent lg:hidden"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-pink-lilac via-transparent hidden lg:block"></div>
         </div>
 
-        {/* Texto em fundo limpo para não "sujar" a imagem */}
         <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 lg:px-24 py-12 lg:py-0 lg:order-1 relative z-10 flex-1">
           <div className="max-w-xl">
             <span className="text-fuchsia-600 font-bold tracking-[0.3em] uppercase mb-6 block">Especialista em Naturalidade</span>
@@ -152,19 +149,39 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* RESULTADOS */}
-      <section className="py-24 px-8 bg-white">
+      {/* SEÇÃO: Harmonização Facial de 💚 */}
+      <section className="py-24 px-8 bg-white" id="resultados">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="serif text-5xl text-fuchsia-950 mb-4">A Arte da Sutileza</h2>
-            <p className="text-gray-500 text-lg">Clique para ampliar alguns de nossos resultados reais.</p>
+            <div className="inline-flex items-center justify-center gap-2 px-6 py-2 rounded-full bg-pink-50 text-fuchsia-600 font-bold uppercase tracking-widest text-sm mb-6 border border-pink-100">
+              <Heart size={16} fill="currentColor" /> Resultados com Propósito
+            </div>
+            <h2 className="serif text-5xl lg:text-6xl text-fuchsia-950 mb-6 leading-tight">Harmonização Facial de 💚</h2>
+            <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+              Muito além da estética, entregamos autoestima e felicidade. Confira as transformações que realçam a essência de cada paciente com naturalidade absoluta.
+            </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {IMAGES.galleryResults.map((img, idx) => (
-              <div key={idx} onClick={() => setSelectedImage(img)} className="aspect-[3/4] overflow-hidden rounded-2xl cursor-pointer hover:scale-[1.02] transition-transform duration-500 shadow-sm border border-pink-50">
-                <img src={img} className="w-full h-full object-cover" alt="Resultado" />
+              <div 
+                key={idx} 
+                onClick={() => setSelectedImage(img)} 
+                className="group relative aspect-[3/4] overflow-hidden rounded-[30px] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 border border-pink-50"
+              >
+                <img src={img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={`Resultado Harmonização Facial ${idx + 1}`} />
+                <div className="absolute inset-0 bg-gradient-to-t from-fuchsia-950/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-center pb-6">
+                   <span className="bg-white/90 backdrop-blur-sm text-fuchsia-950 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-tighter shadow-xl">Ver Detalhes</span>
+                </div>
               </div>
             ))}
+          </div>
+          
+          <div className="mt-16 text-center">
+            <p className="text-gray-400 italic text-sm mb-8 italic">"A melhor maquiagem é uma pele saudável e um sorriso confiante."</p>
+            <a href={getWhatsAppLink(true)} target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" className="border-pink-200 text-fuchsia-700 hover:bg-pink-50">QUERO UM RESULTADO ASSIM</Button>
+            </a>
           </div>
         </div>
       </section>
@@ -197,6 +214,23 @@ const App: React.FC = () => {
         </div>
       </section>
 
+      {/* BASTIDORES & LIFESTYLE */}
+      <section className="py-24 px-8 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+             <h2 className="serif text-4xl text-fuchsia-950">Experiência Giulia Bouças</h2>
+             <p className="text-gray-500 mt-4">Cuidado em cada detalhe, do café ao resultado final.</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {IMAGES.galleryLifestyle.slice(0, 8).map((img, i) => (
+              <div key={i} className="aspect-square rounded-3xl overflow-hidden shadow-sm border border-gray-100">
+                <img src={img} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Consultório" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA FINAL */}
       <section className="py-32 px-8 text-center bg-fuchsia-950 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -220,7 +254,7 @@ const App: React.FC = () => {
           <a href={EXPERT_DATA.instagram} className="text-fuchsia-300 hover:text-fuchsia-600 transition-colors"><Instagram size={32} /></a>
           <a href={EXPERT_DATA.whatsapp} className="text-fuchsia-300 hover:text-fuchsia-600 transition-colors"><MessageCircle size={32} /></a>
         </div>
-        <p className="text-[10px] text-gray-300 uppercase tracking-widest italic">Desenvolvido para Dra. Giulia Bouças - 2024</p>
+        <p className="text-[10px] text-gray-300 uppercase tracking-widest italic">Desenvolvido com 💚 para Dra. Giulia Bouças - 2024</p>
       </footer>
 
       <Lightbox image={selectedImage} onClose={() => setSelectedImage(null)} />
@@ -237,7 +271,7 @@ const App: React.FC = () => {
             <img src={IMAGES.hero} className="w-full h-full object-cover object-top" alt="Dra" />
             <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
             <div className="absolute top-8 left-0 right-0 flex justify-center">
-               <span className="bg-green-500 text-white px-8 py-2 rounded-full font-bold shadow-2xl animate-pulse">PERFIL COMPATÍVEL ✅</span>
+               <span className="bg-green-500 text-white px-8 py-2 rounded-full font-bold shadow-2xl animate-pulse flex items-center gap-2">PERFIL COMPATÍVEL <Heart size={16} fill="white" /></span>
             </div>
           </div>
           <div className="max-w-md mx-auto px-8 py-12 text-center -mt-16 relative z-10 bg-white rounded-t-[40px]">
