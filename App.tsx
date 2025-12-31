@@ -67,15 +67,15 @@ const App: React.FC = () => {
     <div className="fixed inset-0 z-[100] bg-pink-lilac flex items-center justify-center p-6 overflow-y-auto">
       <div className="max-w-md w-full glass-card p-10 rounded-[40px] shadow-2xl border border-white/60 text-center relative overflow-hidden">
         <div className="mb-8 flex justify-center">
-          <div className="w-32 h-32 rounded-full border-4 border-white shadow-2xl overflow-hidden ring-8 ring-fuchsia-100/50">
+          <div className="w-28 h-28 rounded-full border-4 border-white shadow-2xl overflow-hidden ring-8 ring-fuchsia-100/50">
             <img src={IMAGES.quizBg} className="w-full h-full object-cover" alt="Dra. Giulia" />
           </div>
         </div>
-        <h2 className="serif text-4xl mb-6 text-fuchsia-950 leading-tight">Bem-vinda ao universo de <br/><span className="font-bold">Dra. Giulia Bouças</span></h2>
-        <p className="mb-10 text-gray-700 text-lg">Para uma experiência exclusiva, como deseja prosseguir?</p>
-        <div className="flex flex-col gap-4">
-          <Button onClick={() => setState('QUIZ')} variant="primary" className="py-6">INICIAR AVALIAÇÃO EXCLUSIVA <ArrowRight size={20} /></Button>
-          <Button onClick={() => setState('LANDING')} variant="outline" className="py-6">IR DIRETO PARA O SITE</Button>
+        <h2 className="serif text-4xl mb-4 text-fuchsia-950 leading-tight">Bem-vinda à experiência <br/><span className="font-bold">Dra. Giulia Bouças</span></h2>
+        <p className="mb-8 text-gray-700 text-lg">Para um atendimento personalizado, como deseja prosseguir?</p>
+        <div className="flex flex-col gap-3">
+          <Button onClick={() => setState('QUIZ')} variant="primary" className="py-5">INICIAR AVALIAÇÃO <ArrowRight size={20} /></Button>
+          <Button onClick={() => setState('LANDING')} variant="outline" className="py-5">IR DIRETO PARA O SITE</Button>
         </div>
       </div>
     </div>
@@ -85,32 +85,39 @@ const App: React.FC = () => {
     const progress = ((currentQuestion + 1) / QUIZ_QUESTIONS.length) * 100;
     return (
       <div className="fixed inset-0 z-[110] bg-pink-lilac overflow-hidden flex flex-col">
-        <div className="h-[40vh] w-full relative shrink-0">
+        {/* Cabeçalho mais compacto no mobile */}
+        <div className="h-[25vh] sm:h-[35vh] w-full relative shrink-0">
           <img src={IMAGES.quizBg} className="w-full h-full object-cover object-top" alt="Dra Giulia" />
           <div className="absolute inset-0 bg-gradient-to-t from-pink-lilac via-transparent"></div>
         </div>
         
-        <div className="flex-1 px-6 -mt-16 relative z-10 overflow-y-auto pb-12">
+        <div className="flex-1 px-4 sm:px-6 -mt-10 relative z-10 overflow-y-auto pb-10">
           <div className="max-w-md mx-auto">
-            <div className="mb-6 flex flex-col items-center">
-              <span className="serif text-lg text-fuchsia-900 font-bold uppercase tracking-[0.2em] bg-white/60 backdrop-blur px-6 py-2 rounded-full shadow-sm mb-6">Dra. Giulia Bouças</span>
-              <div className="w-full bg-white/40 h-1.5 rounded-full overflow-hidden">
+            <div className="mb-4 flex flex-col items-center">
+              <span className="serif text-sm text-fuchsia-900 font-bold uppercase tracking-[0.2em] bg-white/70 backdrop-blur px-4 py-1.5 rounded-full shadow-sm mb-4">Dra. Giulia Bouças</span>
+              <div className="w-full bg-white/40 h-1 rounded-full overflow-hidden">
                 <div className="bg-fuchsia-600 h-full transition-all duration-700" style={{ width: `${progress}%` }}></div>
               </div>
             </div>
 
-            <div className="glass-card p-8 rounded-[35px] shadow-2xl animate-in slide-in-from-bottom-6 duration-500">
-              <h2 className="serif text-3xl text-fuchsia-950 mb-8 text-center font-bold leading-tight">{QUIZ_QUESTIONS[currentQuestion].question}</h2>
-              <div className="flex flex-col gap-3">
+            <div className="glass-card p-6 sm:p-8 rounded-[30px] shadow-2xl animate-in slide-in-from-bottom-4 duration-500">
+              <h2 className="serif text-2xl sm:text-3xl text-fuchsia-950 mb-6 text-center font-bold leading-tight">
+                {QUIZ_QUESTIONS[currentQuestion].question}
+              </h2>
+              <div className="flex flex-col gap-2.5">
                 {QUIZ_QUESTIONS[currentQuestion].options.map((option, idx) => (
-                  <button key={idx} onClick={() => handleAnswer(option)} className="w-full p-5 text-left rounded-2xl bg-white/90 border border-fuchsia-50 shadow-sm hover:border-fuchsia-500 hover:bg-fuchsia-50 transition-all duration-300 text-gray-800 font-medium text-lg flex justify-between items-center group">
-                    <span>{option}</span>
-                    <ChevronRight size={20} className="text-fuchsia-200 group-hover:text-fuchsia-600 group-hover:translate-x-1 transition-all" />
+                  <button 
+                    key={idx} 
+                    onClick={() => handleAnswer(option)} 
+                    className="w-full p-4 sm:p-5 text-left rounded-xl sm:rounded-2xl bg-white/90 border border-fuchsia-50 shadow-sm hover:border-fuchsia-500 hover:bg-fuchsia-50 transition-all duration-300 text-gray-800 font-medium text-base sm:text-lg flex justify-between items-center group"
+                  >
+                    <span className="leading-snug">{option}</span>
+                    <ChevronRight size={18} className="text-fuchsia-200 group-hover:text-fuchsia-600 group-hover:translate-x-1 transition-all shrink-0 ml-2" />
                   </button>
                 ))}
               </div>
             </div>
-            <button onClick={() => setState('LANDING')} className="w-full mt-8 text-fuchsia-800 font-bold underline opacity-60 text-sm">Pular e ver o site</button>
+            <button onClick={() => setState('LANDING')} className="w-full mt-6 text-fuchsia-800 font-bold underline opacity-60 text-xs uppercase tracking-widest">Pular para o site</button>
           </div>
         </div>
       </div>
@@ -267,7 +274,7 @@ const App: React.FC = () => {
       {state === 'QUIZ' && <QuizView />}
       {state === 'RESULT' && (
         <div className="fixed inset-0 z-[150] bg-white overflow-y-auto">
-          <div className="h-[45vh] w-full relative">
+          <div className="h-[40vh] sm:h-[45vh] w-full relative">
             <img src={IMAGES.hero} className="w-full h-full object-cover object-top" alt="Dra" />
             <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
             <div className="absolute top-8 left-0 right-0 flex justify-center">
